@@ -16,13 +16,14 @@ var hour17 = $("17");
 var hour18 = $("18");
 var hour19 = $("19");
 
-
+//function to display formatted date and time, also increments time foward
 function initialiseTime() {
     $("#currentDay").text(moment().format("dddd, MMM Do, YYYY, HH:mm:ss"));
     setTimeout(initialiseTime, 1000);
      
 }
 
+//function to call the saved content from each box when the page is loaded
 function boxes() {
 
  $(".time-block").each(function() {
@@ -36,11 +37,11 @@ function boxes() {
 
     });
 }
+//calls each function
 boxes();
-
 initialiseTime();
 
-
+//logic for 'save' buttons; saves box input to local storage
 saveBtn.on("click", function () {
  var time = $(this).parent().attr("id");
  var description = $(this).siblings(".description").val();
@@ -48,7 +49,7 @@ saveBtn.on("click", function () {
     localStorage.setItem(time, description);
 });
 
-
+//styles each box based on the current time; gray for past, red for present, and green for future
 function timeStyleBoxes() {
     hour = time.hours();
     $(".time-block").each(function () {
@@ -71,5 +72,5 @@ function timeStyleBoxes() {
         }
     })
 }
-
+//calls the function above
 timeStyleBoxes();
